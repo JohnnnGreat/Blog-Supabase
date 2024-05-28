@@ -11,11 +11,11 @@ const PostContainer = ({ data }: { data: IPost }) => {
         <h1 className="tracking-wider text-gray-400 font-light text-[.9rem] ">
           {data?.category.toUpperCase() || "GENERAL"}
         </h1>
-        <p className="text-black mt-[.4rem] font-light text-[.9rem] ">
+        <p className="text-black mt-[.4rem] font-medium text-[.9rem] ">
           {data?.title.toUpperCase()}
         </p>
         <Link
-          className="font-light underline hover:none text-gray-500 mt-[.66rem]"
+          className="font-light underline inline-block hover:none text-gray-500 mt-[.66rem]"
           href={`/posts/${data.postId}`}
         >
           Read More

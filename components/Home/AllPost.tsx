@@ -10,9 +10,10 @@ const AllPost = () => {
   const { data, isPending } = useGetAllPosts();
 
   return (
-    <div className="h-[70vh] overflow-hidden flex items-center justify-center">
+    <div className="md:h-[90vh] overflow-hidden flex items-center justify-center">
       <div>
-        <div className="flex gap-4">
+        <h1 className="text-[3rem] my-[.7rem]font-bold">Latest Posts</h1>
+        <div className="flex gap-4 flex-wrap md:flex-nowrap justify-center ">
           {data?.map((item: IPost, index: number) => {
             return <PostContainer data={item} key={index} />;
           })}

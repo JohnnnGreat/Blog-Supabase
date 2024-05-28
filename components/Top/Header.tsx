@@ -8,7 +8,7 @@ import { handleLogout } from "@/lib/actions/auth";
 
 const Header = ({ user }: { user: any }) => {
   return (
-    <div className=" w-[1300px] mx-auto p-[1rem] h-[200px] py-[1rem]">
+    <div className=" max-w-[1300px] w-[100% !important] mx-auto p-[1rem] h-[200px] py-[1rem] overflow-hidden">
       <div className="flex justify-between items-center">
         <div className="flex gap-3">
           <Facebook size={20} strokeWidth={0.75} />
@@ -36,7 +36,7 @@ const Header = ({ user }: { user: any }) => {
       </div>
 
       <div className="w-full flex justify-center mt-[1.6rem]">
-        <ul className="flex items-center justify-center gap-2">
+        <ul className="flex items-start md:items-center justify-start md:justify-center gap-2 overflow-x-auto w-full">
           {category.map((item, index) => (
             <li key={index}>
               <Link

@@ -37,7 +37,7 @@ export const getPostByPostId = async (postId: string): Promise<IFuntionDefault |
 
 export const addPost = async (jsonPayload: any): Promise<any> => {
   const post = await JSON.parse(jsonPayload);
- 
+
   try {
     const supabase = createClient();
 
@@ -53,7 +53,12 @@ export const getPostByCategory = async (category: string): Promise<any> => {
   try {
     const supabase = await createClient();
 
-    const { data, error } = await supabase.from("Posts").select("*").eq("category", category);
+    const { data, error } = await supabase
+      .from("Posts")
+      .select("*")
+      .eq("category", category)
+      .order("created_at", { ascending: false })
+      .limit(4);
 
     return { data, error };
   } catch (error) {

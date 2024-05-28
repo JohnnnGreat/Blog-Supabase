@@ -40,6 +40,18 @@ export const getAllPost = async () => {
   }
 };
 
+export const getPostByCategory = async (category: string): Promise<any> => {
+  try {
+    const supabase = await createClient();
+
+    const { data, error } = await supabase.from("Posts").select("*").eq("category", category);
+
+    return { data, error };
+  } catch (error) {
+    return error;
+  }
+};
+
 export const getPostByPostId = async (postId: string): Promise<IFuntionDefault | null | any> => {
   console.log(postId);
   try {
@@ -52,8 +64,6 @@ export const getPostByPostId = async (postId: string): Promise<IFuntionDefault |
     return null;
   }
 };
-
-
 
 export const getPostByUserEmail = async (userEmail: string) => {
   try {
