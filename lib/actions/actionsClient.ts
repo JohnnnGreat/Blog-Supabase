@@ -37,14 +37,26 @@ export const getPostByPostId = async (postId: string): Promise<IFuntionDefault |
 
 export const addPost = async (jsonPayload: any): Promise<any> => {
   const post = await JSON.parse(jsonPayload);
-  console.log(post);
+ 
   try {
     const supabase = createClient();
 
     const { data, error } = await supabase.from("Posts").insert([post]);
-    console.log(data, error);
+
     return { data, error };
   } catch (error) {
     console.log(error);
+  }
+};
+
+export const getPostByCategory = async (category: string): Promise<any> => {
+  try {
+    const supabase = await createClient();
+
+    const { data, error } = await supabase.from("Posts").select("*").eq("category", category);
+
+    return { data, error };
+  } catch (error) {
+    return error;
   }
 };

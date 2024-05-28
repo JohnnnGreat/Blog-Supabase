@@ -1,5 +1,5 @@
 "use client";
-import { getAllPost, getPostByPostId } from "@/lib/actions/actionsClient";
+import { getAllPost, getPostByCategory, getPostByPostId } from "@/lib/actions/actionsClient";
 import { addPost } from "@/lib/actions/actionsClient";
 import { getUserEmail } from "@/lib/actions/auth";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
@@ -11,7 +11,7 @@ export const useAddPost = () => {
     onSuccess: () => {
       console.log("success");
       queryClient.invalidateQueries({
-        queryKey: ["getAllPosts"],
+        queryKey: ["getAllPosts", "getPostsByCategory"],
       });
     },
   });
@@ -27,4 +27,8 @@ export const useGetPostById = (id: string) => {
 
 export const useGetEmail = () => {
   return useQuery({ queryKey: ["getEmail"], queryFn: () => getUserEmail });
+};
+
+export const useGetPostsByCategory = (category: string) => {
+  return useQuery({ queryKey: ["getPostByCategory"], queryFn: () => getPostByCategory(category) });
 };
