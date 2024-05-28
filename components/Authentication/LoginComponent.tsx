@@ -28,10 +28,12 @@ const LoginComponent = () => {
   async function onSubmit(values: z.infer<typeof loginSchema>) {
     const signInUser = await loginUser(values);
 
-    console.log(signInUser);
+    const user = await JSON.parse(signInUser);
+
+    console.log(user);
   }
   return (
-    <div>
+    <div className="w-[80%]">
       <h1 className="text-[#f53f5a]">Register</h1>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
@@ -42,7 +44,7 @@ const LoginComponent = () => {
               <FormItem>
                 <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="Email" {...field} />
+                  <Input type="email" placeholder="Email" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -61,7 +63,9 @@ const LoginComponent = () => {
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <Button className="bg-black text-white w-full" type="submit">
+            Submit
+          </Button>
         </form>
       </Form>
     </div>

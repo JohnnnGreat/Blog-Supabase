@@ -8,13 +8,18 @@ const PostContainer = ({ data }: { data: IPost }) => {
     <div className="w-[250px] h-[300px]">
       <img className="w-full h-[200px] object-cover" src={data?.coverImage} alt="post image" />
       <div className="py-[.8rem]">
-        <h1 className="tracking-wider text-gray-400 font-light text-[.9rem] text-center">
+        <h1 className="tracking-wider text-gray-400 font-light text-[.9rem] ">
           {data?.category.toUpperCase() || "GENERAL"}
         </h1>
-        <p className="text-black mt-[.4rem] font-light text-[.9rem] text-center">
+        <p className="text-black mt-[.4rem] font-light text-[.9rem] ">
           {data?.title.toUpperCase()}
         </p>
-        <Link href={`/posts/${data.postId}`}>Read More</Link>
+        <Link
+          className="font-light underline hover:none text-gray-500 mt-[.66rem]"
+          href={`/posts/${data.postId}`}
+        >
+          Read More
+        </Link>
       </div>
     </div>
   );

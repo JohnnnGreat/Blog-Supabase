@@ -3,7 +3,8 @@ import { cookies } from "next/headers";
 
 export const createClient = () => {
   const cookieStore = cookies();
-
+  const cookieHeader = cookies().get("supabase-auth-token");
+  const supabaseAuthToken = cookieHeader?.value || "";
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -31,6 +32,6 @@ export const createClient = () => {
           }
         },
       },
-    },
+    }
   );
 };

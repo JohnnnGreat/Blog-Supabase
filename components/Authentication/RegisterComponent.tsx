@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { registerSchema } from "@/utils/schema/register";
@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { registerUser } from "@/lib/actions/auth";
 import { message } from "antd";
+import { createClient } from "@/utils/supabase/client";
 
 const RegisterComponent = () => {
   const form = useForm<z.infer<typeof registerSchema>>({
@@ -37,10 +38,10 @@ const RegisterComponent = () => {
     return message.error(error.code);
   }
   return (
-    <div>
+    <div className="w-[80%]">
       <h1 className="text-[#f53f5a]">Register</h1>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="w-[50% !important] space-y-2 ">
           <FormField
             control={form.control}
             name="username"
@@ -80,7 +81,9 @@ const RegisterComponent = () => {
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <Button className="bg-black text-white w-full" type="submit">
+            Submit
+          </Button>
         </form>
       </Form>
     </div>

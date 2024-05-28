@@ -8,7 +8,7 @@ import { handleLogout } from "@/lib/actions/auth";
 
 const Header = ({ user }: { user: any }) => {
   return (
-    <div className=" w-[1300px] mx-auto p-[1rem] py-[1rem]">
+    <div className=" w-[1300px] mx-auto p-[1rem] h-[200px] py-[1rem]">
       <div className="flex justify-between items-center">
         <div className="flex gap-3">
           <Facebook size={20} strokeWidth={0.75} />

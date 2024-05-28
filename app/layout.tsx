@@ -1,6 +1,10 @@
 import { GeistSans } from "geist/font/sans";
 import "./globals.css";
-import { render } from "react-dom"; 
+import { render } from "react-dom";
+import TanStack from "@/components/ReactQuery";
+import { createClient } from "@/utils/supabase/server";
+import Header from "@/components/Top/Header";
+
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
   : "http://localhost:3000";
@@ -11,18 +15,21 @@ export const metadata = {
   description: "The fastest way to build apps with Next.js and Supabase",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const supabase = createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
   return (
-    <html lang="en" className={GeistSans.className}>
-      <body className="bg-background text-foreground">
-        <main className="min-h-screen flex flex-col items-center">
-          {children}
-        </main>
-      </body>
-    </html>
+    <TanStack>
+      <html lang="en" className={GeistSans.className}>
+        <body className="bg-background text-foreground">
+          <Header user={user} />
+          <main className="flex flex-col items-center">{children}</main>
+        </body>
+      </html>
+    </TanStack>
   );
 }

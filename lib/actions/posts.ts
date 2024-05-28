@@ -10,17 +10,20 @@ import { createClient } from "@/utils/supabase/client";
 
 export const addPost = async (jsonPayload: any) => {
   const post = await JSON.parse(jsonPayload);
-
+  console.log(post);
   try {
     const supabase = createClient();
 
     const { data, error } = await supabase.from("Posts").insert([post]);
-
+    console.log(data, error);
     return { data, error };
-  } catch (error) {}
+  } catch (error) {
+    console.log(error);
+  }
 };
 
-export const getAllPost = async (): Promise<IFunctionreturn | null> => {
+export const getAllPost = async () => {
+  console.log("welcome");
   try {
     const supabase = createClient();
     const { data, error } = await supabase
@@ -28,7 +31,8 @@ export const getAllPost = async (): Promise<IFunctionreturn | null> => {
       .select("*")
       .order("created_at", { ascending: false })
       .limit(4);
-
+    console.log("reached");
+    console.log(data, error);
     return { data, error };
   } catch (error) {
     console.error("Error fetching post:", error);
@@ -36,18 +40,38 @@ export const getAllPost = async (): Promise<IFunctionreturn | null> => {
   }
 };
 
-export const getPostByPostId = async (postId: Islug): Promise<IFuntionDefault | null> => {
+export const getPostByPostId = async (postId: string): Promise<IFuntionDefault | null | any> => {
+  console.log(postId);
   try {
     const supabase = createClient();
 
     const { data, error } = await supabase.from("Posts").select("*").eq("postId", postId).single();
 
-    // if (error) {
-    //   return error;
-    // }
-
-    return { error, data };
+    return { data, error };
   } catch (error) {
     return null;
+  }
+};
+
+export const getPostByCategory = async (category: string): Promise<any> => {
+  try {
+    const supabase = await createClient();
+
+    const { data, error } = await supabase.from("Posts").select("*").eq("category", category);
+
+    return { data, error };
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getPostByUserEmail = async (userEmail: string) => {
+  try {
+    const supabase = await createClient();
+
+    const { data, error } = await supabase.from("Posts").select("*").eq("user", userEmail);
+    return { data, error };
+  } catch (error) {
+    return error;
   }
 };

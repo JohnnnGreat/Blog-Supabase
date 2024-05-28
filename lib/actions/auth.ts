@@ -17,8 +17,14 @@ export const registerUser = async (user: Iuser): Promise<string | any> => {
       email,
       password,
     });
-    console.log(error, data);
-    return JSON.stringify({ error, data });
+
+    if (error) {
+      return JSON.stringify({ error });
+    }
+
+    const response = await createUserToDatabase(user);
+
+    return JSON.stringify(response);
   } catch (error) {
     console.log("error", error);
   }
@@ -33,9 +39,9 @@ export const loginUser = async (user: ILoginUser) => {
   const { email, password } = user;
   try {
     const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-    if (error) return { error: error };
+    console.log(data, error);
 
-    return { data: data };
+    return JSON.stringify({ data, error });
   } catch (error) {
     console.log("error", error);
   }
@@ -46,4 +52,32 @@ export const handleLogout = async () => {
 
   supabase.auth.signOut();
   redirect("/a");
+};
+
+export const createUserToDatabase = async (user: Iuser) => {
+  const supabase = await createClient();
+
+  try {
+    const { data, error } = await supabase
+      .from("User")
+      .insert([{ email: user?.email, password: user?.password, username: user?.username }]);
+
+    return { data, error };
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getUserEmail = async (): Promise<string | undefined | any> => {
+  try {
+    const supabase = await createClient();
+
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+
+    return user?.email;
+  } catch (err: any) {
+    return err;
+  }
 };

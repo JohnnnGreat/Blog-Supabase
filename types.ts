@@ -20,6 +20,6 @@ export interface IFunctionreturn {
 }
 
 export interface IFuntionDefault {
-  data: IPost | null;
-  error: Error | any;
+  data?: IPost | null | any;
+  error?: Error | any;
 }

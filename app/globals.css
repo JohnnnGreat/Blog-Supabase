@@ -4,6 +4,38 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  -background: 231 15% 18%;
+  --foreground: 60 30% 96%;
+
+  --muted: 232 14% 31%;
+  --muted-foreground: 60 30% 96%;
+
+  --popover: 231 15% 18%;
+  --popover-foreground: 60 30% 96%;
+
+  --border: 232 14% 31%;
+  --input: 225 27% 51%;
+
+  --card: 232 14% 31%;
+  --card-foreground: 60 30% 96%;
+
+  --primary: 265 89% 78%;
+  --primary-foreground: 60 30% 96%;
+
+  --secondary: 326 100% 74%;
+  --secondary-foreground: 60 30% 96%;
+
+  --accent: 225 27% 51%;
+  --accent-foreground: 60 30% 96%;
+
+  --destructive: 0 100% 67%;
+  --destructive-foreground: 60 30% 96%;
+
+  --ring: 225 27% 51%;
+  --radius: 1rem;
+}
+
 @layer base {
   * {
     @apply box-border list-none p-0 m-0 scroll-smooth;
@@ -285,8 +317,16 @@
   grid-template-columns: 40% 60%;
 }
 
+@media (max-width: 640px) {
+  .Layoutgrid {
+    grid-template-columns: 1fr;
+    background: red;
+  }
+}
+
 body {
-  background-color: rgb(245, 245, 245) !important;
+  background-color: #fdfdfd !important;
+  width: 100vw;
 }
 
 .editor-grid {

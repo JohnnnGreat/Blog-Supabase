@@ -5,6 +5,7 @@ import ConnectSupabaseSteps from "@/components/tutorial/ConnectSupabaseSteps";
 import SignUpUserSteps from "@/components/tutorial/SignUpUserSteps";
 import Header from "@/components/Top/Header";
 import AllPost from "@/components/Home/AllPost";
+import Category from "@/components/Home/Category";
 
 export default async function Index() {
   const supabase = createClient();
@@ -15,8 +16,8 @@ export default async function Index() {
 
   return (
     <>
-      <Header user={user} />
       <AllPost />
+      <Category />
     </>
   );
 }
