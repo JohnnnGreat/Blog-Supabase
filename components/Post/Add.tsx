@@ -55,7 +55,7 @@ const Add = () => {
 
       const {
         data: { user },
-      } = await supabase.auth.getUser();
+      }: { data: any } = await supabase.auth.getUser();
 
       setEmail(user?.email);
     })();
@@ -73,7 +73,7 @@ const Add = () => {
   const [title, setTitle] = useState("");
 
   const [selectValue, setSelectValueChange] = useState("");
-  const [files, setFiles] = useState(null);
+  const [files, setFiles] = useState<any>(null);
   const onDrop = useCallback(async (acceptedFiles: any) => {
     if (acceptedFiles.length > 0) {
       const file = acceptedFiles[0];

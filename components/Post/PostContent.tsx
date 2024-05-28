@@ -24,7 +24,7 @@ const PostContent = () => {
 
       const {
         data: { user },
-      } = await supabase.auth.getUser();
+      }: { data: any } = await supabase.auth.getUser();
 
       setEmail(user?.email);
     })();

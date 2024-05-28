@@ -34,7 +34,7 @@ interface ILoginUser {
   email: string;
   password: string;
 }
-export const loginUser = async (user: ILoginUser) => {
+export const loginUser = async (user: ILoginUser): Promise<string | any> => {
   const supabase = await createClient();
   const { email, password } = user;
   try {
