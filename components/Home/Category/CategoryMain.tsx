@@ -8,11 +8,11 @@ const CategoryMain = () => {
   const [currentCategory, setCurrentCategory] = useState("Technology");
   return (
     <div className="w-full">
-      <div className="flex gap-2">
+      <div className="flex gap-2 w-full overflow-x-auto pb-[.6rem]">
         {category?.map((item, index) => (
           <button
-            className={`border-2 border-blue-500 rounded-full py-[.6rem] ${
-              currentCategory === item && "border-none bg-blue-500 test-white"
+            className={`border-1 border-blue-500 rounded-full py-[.6rem] px-[1rem] transition-all ${
+              currentCategory === item && "border-none bg-blue-500 text-white transition-all"
             }`}
             onClick={() => {
               setCurrentCategory(item);
